@@ -1,4 +1,5 @@
 # my-books
+<<<<<<< HEAD
 
 ## Project setup
 ```
@@ -27,3 +28,6 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+POC using VueJS
+>>>>>>> d59eda9275119c66b4f7d9ee474403d0f6329ea7
