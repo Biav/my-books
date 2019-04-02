@@ -1,5 +1,19 @@
 <template>
-  <v-layout row>
+  <div id="content">
+    <v-flex xs12 sm6 md3>
+        <v-text-field
+          label="Solo"
+          v-model="book"
+          placeholder="Search book by name"
+          solo
+          @keyup.enter="search"
+        ></v-text-field>
+      </v-flex>
+        <!-- <p> {{ books }} </p> -->
+
+  </div>
+
+  <!-- <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-img
@@ -31,13 +45,44 @@
         </v-slide-y-transition>
       </v-card>
     </v-flex>
-  </v-layout>
+  </v-layout> -->
 </template>
 
 <script>
   export default {
     data: () => ({
-      show: false
-    })
+      show: false,
+      book: '',
+      books: []
+    }),
+
+    methods: {
+      search() {
+        console.log(this.book);
+        this.$http.get('https://www.googleapis.com/books/v1/volumes?q='+this.book)
+                  .then(response => {
+                      return response.json();
+                  })
+                  .then(data => {
+
+                    for (var i in data.items) {
+                      this.books[i] = {
+                        title: data.items[i].volumeInfo.title,
+                        image: data.items[i].volumeInfo.imageLinks.smallThumbnail
+                      };
+                      // searchBooks[i].title = data.items[i].volumeInfo.title;
+                      // searchBooks[i]["image"] = data.items[i].volumeInfo.imageLinks.smallThumbnail;
+
+                      // console.log(data.items[i].volumeInfo.imageLinks.smallThumbnail);
+                      // console.log(data.items[i].volumeInfo.title);
+                    }
+
+                    console.log(this.books);
+
+                  });
+      }
+    }
   }
 </script>
+
+

@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <app-header></app-header>
-    <app-books></app-books>
+    <router-view></router-view>
+
     <app-footer></app-footer>
   </v-app>
 </template>
