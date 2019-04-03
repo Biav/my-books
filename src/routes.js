@@ -1,8 +1,8 @@
 import Setting from './components/Setting';
-import Books from './components/Books';
+import Home from './components/Home';
 
 export const routes = [
-    {path:'/books', component: Books},
+    {path:'/', component: Home},
     {path:'/setting', component: Setting}
 ];
 

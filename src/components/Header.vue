@@ -27,11 +27,13 @@
           color="cyan"
           slider-color="yellow"
         > 
-          <v-tab to="/books">Books</v-tab>
+          <v-tab to="/">Add Books</v-tab>
           <v-tab to="/setting">Settings</v-tab>
           
         </v-tabs>
       </template>
     </v-toolbar>
+        <router-view></router-view>
+
   </div>
 </template>
