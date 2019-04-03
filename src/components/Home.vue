@@ -1,27 +1,33 @@
 <template>
   <div id="content">
-    <v-flex xs12 sm6 md3>
-        <v-text-field
-          label="Solo"
+    <v-layout row class="search">
+      <v-flex xs12 class="search-book">
+        <v-text-field 
+          label="Search book by name"
           v-model="book"
           placeholder="Search book by name"
-          solo
-          @keyup.enter="search"
-        ></v-text-field>
+          @keyup.enter="search"></v-text-field>
       </v-flex>
-      <component :is="showBooks" :books="books"></component>
+      <v-flex p>
+        <v-btn flat icon @click="search">
+          <v-icon class="primary--text">search</v-icon>
+        </v-btn>
+      </v-flex>
+    </v-layout>
+    <component :is="showBooks" :books="books"></component>
   </div>
 </template>
 
 <script>
   import Book from './Book.vue';
+  import MyBooks from './MyBooks.vue';
 
   export default {
     data: () => ({
       show: false,
       book: '',
       books: [],
-      showBooks: false
+      showBooks: 'my-books'
     }),
     methods: {
       search() {
@@ -41,7 +47,7 @@
                     for (var i in data.items) {
                       var books = {
                         title: data.items[i].volumeInfo.title,
-                        description: (data.items[i].volumeInfo.description).substr(0, 140) + ' ...',
+                        description: (data.items[i].volumeInfo.description).substr(0, 120) + ' ...',
                         image: data.items[i].volumeInfo.imageLinks.thumbnail,
                         author: data.items[i].volumeInfo.authors[0]
                       };
@@ -58,9 +64,20 @@
       }
     },
     components: {
-      'book': Book
+      'book': Book,
+      'my-books': MyBooks
     }
   }
 </script>
+
+<style>
+  .search {
+    margin-top: 20px;
+  }
+  .search-book {
+    margin-left: 40px;
+  }
+</style>
+
 
 

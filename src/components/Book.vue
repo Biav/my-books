@@ -26,45 +26,8 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <v-btn flat color="orange" @click="checkRead(book)">Read:</v-btn>
                 <input type="month" v-model="date">
-                <!-- <v-layout row wrap>
-    <v-flex xs11 sm12>
-      <v-menu
-        ref="menu"
-        v-model="menu"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        :return-value.sync="date"
-        lazy
-        transition="scale-transition"
-        offset-y
-        full-width
-        max-width="290px"
-        min-width="290px"
-      >
-        <template v-slot:activator="{ on }">
-          <v-text-field
-            v-model="book.date"
-            label="Picker in menu"
-            prepend-icon="event"
-            readonly
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="book.date"
-          type="month"
-          no-title
-          scrollable
-        >
-          <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-        </v-date-picker>
-      </v-menu>
-    </v-flex>
-  </v-layout> -->
+                <v-btn flat color="orange" @click="checkRead(book)">Read</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -96,9 +59,13 @@
   }
 </script>
 
-<style>
+<style scoped>
   .books {
     display: inline;
+  }
+
+  .headline {
+    text-shadow: 2px 2px 4px #000000;
   }
 </style>
 
