@@ -107,6 +107,36 @@ import { setTimeout } from 'timers';
 
                   });
       },1000);
+
+      console.log(this.$store.getters.load);
     }
+    // mounted(){
+    //   var books;
+    //   self = this;
+    //   // this.load = true;
+    //   setTimeout(function(){
+    //     self.$http.get('data.json')
+    //               .then(response => {
+    //                   return response.json();
+    //               })
+    //               .then(data => {
+    //                   for(var i in data) {
+    //                     books = {
+    //                       id: i,
+    //                       title: data[i].title,
+    //                       author: data[i].author,
+    //                       description: data[i].description,
+    //                       show: false,
+    //                       image: data[i].image,
+    //                       link: data[i].link
+    //                     };
+    //                     self.books.push(books);
+    //                   }
+
+    //                   self.load = false;
+
+    //               });
+    //   },1000);
+    // }
   }
 </script>

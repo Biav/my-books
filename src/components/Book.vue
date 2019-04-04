@@ -22,8 +22,11 @@
                 </div>
               </v-card-title>
               <v-card-actions>
+                <v-btn flat color="indigo">Read in:</v-btn>
                 <input type="month" v-model="book.date">
-                <v-btn flat color="orange" @click="checkRead(book)">Read</v-btn>
+              </v-card-actions>
+              <v-card-actions class="check">
+                <v-btn depressed small color="primary" @click="checkRead(book)">Chek as Read</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -38,7 +41,7 @@
   export default {
     props: ["books"],
     data: () => ({
-      date: new Date().toISOString().substr(0, 7),
+      test: new Date().toISOString().substr(0, 7),
       menu: false,
       modal: false
     }),
@@ -74,6 +77,11 @@
     max-height: 110px;
     -webkit-line-clamp: 52;
     -webkit-box-orient: vertical;
+  }
+
+  .check {
+    display: flex;
+    justify-content: center;
   }
 </style>
 

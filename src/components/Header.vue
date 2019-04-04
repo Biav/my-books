@@ -14,7 +14,7 @@
       <template v-slot:extension>
         <v-tabs centered color="cyan" slider-color="yellow"> 
           <v-tab to="/">Books</v-tab>
-          <v-tab to="/setting">Settings</v-tab> 
+          <v-tab to="/goals">Goals</v-tab> 
         </v-tabs>
       </template>
     </v-toolbar>
