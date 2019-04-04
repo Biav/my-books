@@ -6,11 +6,7 @@
         <v-layout row wrap>
           <v-flex xs6 sm4 md3 xl2 class="lg5-custom" v-for="book in books">
             <v-card >
-              <v-img
-                class="white--text"
-                height="200px"
-                :src="book.image"
-              >
+              <v-img class="white--text" height="200px" :src="book.image">
                 <v-container fill-height fluid>
                   <v-layout fill-height>
                     <v-flex xs12 align-end flexbox>
@@ -22,11 +18,11 @@
               <v-card-title>
                 <div>
                   <span class="grey--text">{{ book.author }}</span><br>
-                  <span>{{ book.description }}</span><br>
+                  <span class="description">{{ book.description }}</span><br>
                 </div>
               </v-card-title>
               <v-card-actions>
-                <input type="month" v-model="date">
+                <input type="month" v-model="book.date">
                 <v-btn flat color="orange" @click="checkRead(book)">Read</v-btn>
               </v-card-actions>
             </v-card>
@@ -54,6 +50,8 @@
                   }, error => {
                       console.log(error);
                   });
+
+        this.$emit('showBooks','my-books');
       }
     }
   }
@@ -66,6 +64,16 @@
 
   .headline {
     text-shadow: 2px 2px 4px #000000;
+  }
+
+  .description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;
+    max-height: 110px;
+    -webkit-line-clamp: 52;
+    -webkit-box-orient: vertical;
   }
 </style>
 

@@ -14,7 +14,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <component :is="showBooks" :books="books"></component>
+    <component :is="showBooks" @showBooks="showBooks = $event" :books="books"></component>
   </div>
 </template>
 
@@ -43,13 +43,14 @@
                     this.showBooks = '';
                     self.books = [];
    
-
                     for (var i in data.items) {
                       var books = {
                         title: data.items[i].volumeInfo.title,
-                        description: (data.items[i].volumeInfo.description).substr(0, 120) + ' ...',
+                        link: data.items[i].volumeInfo.infoLink,
+                        description: (data.items[i].volumeInfo.description)?data.items[i].volumeInfo.description:'',
                         image: data.items[i].volumeInfo.imageLinks.thumbnail,
-                        author: data.items[i].volumeInfo.authors[0]
+                        author: (data.items[i].volumeInfo.authors)?data.items[i].volumeInfo.authors[0]:'',
+                        data: new Date().toISOString().substr(0, 7)
                       };
 
                       self.books.push(books);
@@ -70,7 +71,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .search {
     margin-top: 20px;
   }

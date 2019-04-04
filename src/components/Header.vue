@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-toolbar
-      color="cyan"
-      dark
-      tabs
-    >
+    <v-toolbar color="cyan" dark tabs>
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>My Books</v-toolbar-title>
@@ -16,20 +12,12 @@
       </v-btn>
 
       <template v-slot:extension>
-        
-        <v-tabs
-          v-model="model"
-          centered
-          color="cyan"
-          slider-color="yellow"
-        > 
-          <v-tab to="/">Add Books</v-tab>
-          <v-tab to="/setting">Settings</v-tab>
-          
+        <v-tabs centered color="cyan" slider-color="yellow"> 
+          <v-tab to="/">Books</v-tab>
+          <v-tab to="/setting">Settings</v-tab> 
         </v-tabs>
       </template>
     </v-toolbar>
-        <router-view></router-view>
-
+    <router-view></router-view>
   </div>
 </template>
