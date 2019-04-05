@@ -78,24 +78,31 @@
 
 <script>
 import { setTimeout } from 'timers';
+import { db } from '../config/db';
+let booksRef = db.ref('data')
+
   export default {
     data: () => ({
       books: []
     }), 
+    firebase: {
+      books: booksRef
+    },
     methods: {
       show(book) {
         book.show = !(book.show);
       },
       deleteBook(book) {
-        this.$http.delete('data.json', book.id).then(response => {
-          // success callback
-          console.log("success");
-          console.log(response);
-        }, response => {
-          // error callback
-          console.log("error");
-          console.log(response);
-        });
+        
+
+        booksRef.child(book.id).remove().
+                then(()=>
+                  self = this,
+                  setTimeout(function(){
+                    self.$store.dispatch('getMyBooks');
+                    self.books = self.$store.getters.books;
+                  },1000)
+                );
       }
     },
     mounted(){

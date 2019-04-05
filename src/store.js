@@ -44,6 +44,7 @@ export default new Vuex.Store({
                     link: data[i].link
                   };
                   commit('storeBooks', book);
+                  debugger;
                   console.log(state.books);
                 }
                 commit('setLoad', false)
