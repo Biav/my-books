@@ -1,16 +1,34 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import VueResource from 'vue-resource';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+Vue.use(VueResource);
+
+Vue.http.options.root = 'https://my-books-b8b9f.firebaseio.com/';
 
 export default new Vuex.Store({
     state: {
         books: [],
         load: true
     },
+    mutations: {
+        storeBooks (state, books) {
+            if(typeof books === 'object')
+                state.books.push(books)
+            else
+                state.books = [];
+        },
+        setLoad (state, load) {
+            state.load = load
+        },
+    },
     actions: {
         getMyBooks ({commit, state}) {
-            this.$http.get('data.json')
+            var book;
+            commit('storeBooks', false)
+            console.log(state.books);
+            Vue.http.get('data.json')
             .then(response => {
                 return response.json();
             })
@@ -25,11 +43,10 @@ export default new Vuex.Store({
                     image: data[i].image,
                     link: data[i].link
                   };
-                  books.push(book);
+                  commit('storeBooks', book);
+                  console.log(state.books);
                 }
-
-                load = false;
-
+                commit('setLoad', false)
             });
         }
     },

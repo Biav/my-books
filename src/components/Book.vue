@@ -5,7 +5,7 @@
       <v-container grid-list-xl>
         <v-layout row wrap>
           <v-flex xs6 sm4 md3 xl2 class="lg5-custom" v-for="book in books">
-            <v-card >
+            <v-card>
               <v-img class="white--text" height="200px" :src="book.image">
                 <v-container fill-height fluid>
                   <v-layout fill-height>

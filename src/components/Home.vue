@@ -50,7 +50,8 @@
                         description: (data.items[i].volumeInfo.description)?data.items[i].volumeInfo.description:'',
                         image: data.items[i].volumeInfo.imageLinks.thumbnail,
                         author: (data.items[i].volumeInfo.authors)?data.items[i].volumeInfo.authors[0]:'',
-                        date: new Date().toISOString().substr(0, 7)
+                        date: new Date().toISOString().substr(0, 7),
+                        favorite: false
                       };
 
                       self.books.push(books);
