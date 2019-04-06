@@ -1,20 +1,48 @@
 <template>
-  <v-timeline>
-    <v-timeline-item
-      v-for="n in 4"
-      :key="n"
-      color="red lighten-2"
-      large
+  <div class="text-xs-center">
+    <v-progress-circular
+      :rotate="-90"
+      :size="140"
+      :width="15"
+      :value="value"
+      color="primary"
     >
-      <template v-slot:opposite>
-        <span>Tus eu perfecto</span>
-      </template>
-      <v-card class="elevation-2">
-        <v-card-title class="headline">Lorem ipsum</v-card-title>
-        <v-card-text>
-          Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
-        </v-card-text>
-      </v-card>
-    </v-timeline-item>
-  </v-timeline>
+    <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+            <p v-on="on">{{ value / 10 }} / {{ goal }}</p>
+            <span>Books</span>
+        </template>
+         <span>Goals of Books</span>
+    </v-tooltip>
+
+    </v-progress-circular>
+  </div>
 </template>
+
+<style lang="stylus" scoped>
+  .v-progress-circular
+    margin: 1rem
+</style>
+
+<script>
+  export default {
+    data () {
+      return {
+        interval: {},
+        value: 0,
+        goal: this.$store.getters.goal
+      }
+    },
+    beforeDestroy () {
+      clearInterval(this.interval)
+    },
+    mounted () {
+      this.interval = setInterval(() => {
+        if (this.value === 40) {
+          return;
+        }
+        this.value += 10
+      }, 100)
+    }
+  }
+</script>

@@ -3,7 +3,7 @@
     <v-layout row class="search">
       <v-flex xs12 class="search-book">
         <v-text-field 
-          label="Search book by name"
+          label="Search book by name to add in your collection"
           v-model="book"
           placeholder="Search book by name"
           @keyup.enter="search"></v-text-field>
@@ -34,8 +34,8 @@
         var test = { title: 'test', image: 100};
         // this.books.push(test);
         self = this; 
-        console.log(this.books);
-         this.$http.get('https://www.googleapis.com/books/v1/volumes?q='+this.book)
+        if(this.book !== ""){
+          this.$http.get('https://www.googleapis.com/books/v1/volumes?q='+this.book)
                   .then(response => {
                       return response.json();
                   })
@@ -58,6 +58,9 @@
                     }
                     this.showBooks = 'book';
                   });
+        } else {
+          this.showBooks = 'my-books';
+        }
       }
     },
     computed: {

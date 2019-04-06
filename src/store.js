@@ -10,7 +10,8 @@ Vue.http.options.root = 'https://my-books-b8b9f.firebaseio.com/';
 export default new Vuex.Store({
     state: {
         books: [],
-        load: true
+        load: true,
+        goal: 12
     },
     mutations: {
         storeBooks (state, books) {
@@ -27,7 +28,6 @@ export default new Vuex.Store({
         getMyBooks ({commit, state}) {
             var book;
             commit('storeBooks', false)
-            console.log(state.books);
             Vue.http.get('data.json')
             .then(response => {
                 return response.json();
@@ -38,14 +38,13 @@ export default new Vuex.Store({
                     id: i,
                     title: data[i].title,
                     author: data[i].author,
+                    date: data[i].date,
                     description: data[i].description,
                     show: false,
                     image: data[i].image,
                     link: data[i].link
                   };
                   commit('storeBooks', book);
-                  debugger;
-                  console.log(state.books);
                 }
                 commit('setLoad', false)
             });
@@ -57,6 +56,9 @@ export default new Vuex.Store({
         },
         loading (state) {
             return state.load
+        },
+        goal (state) {
+            return state.goal
         }
     }
 });

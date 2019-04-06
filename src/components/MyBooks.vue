@@ -23,15 +23,15 @@
             </v-card-title>
 
             <v-card-actions>
-              <v-flex xs12 sm3>
                 <v-btn flat icon>
                   <v-icon :class="{'favorite-red': book.favorite, 'favorite-grey': !book.favorite}">favorite</v-icon>
+                </v-btn>
+                <v-btn flat icon color="purple" :href="book.link" target="_blank">                                
+                  <i class="material-icons">visibility</i>
                 </v-btn>
                 <v-btn flat icon @click="deleteBook(book)">
                   <v-icon>delete</v-icon>
                 </v-btn>
-              </v-flex>
-              <v-btn flat color="purple" :href="book.link" target="_blank">Explore</v-btn>
               <v-spacer></v-spacer>
               <v-btn icon @click="show(book)">
                 <v-icon>{{ book.show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
@@ -93,56 +93,23 @@ let booksRef = db.ref('data')
         book.show = !(book.show);
       },
       deleteBook(book) {
-        
-
         booksRef.child(book.id).remove().
                 then(()=>
-                  self = this,
-                  setTimeout(function(){
-                    self.$store.dispatch('getMyBooks');
-                    self.books = self.$store.getters.books;
-                  },1000)
+                  this.showBooks()
                 );
+      },
+      showBooks() {
+        self = this,
+        setTimeout(function(){
+          self.$store.dispatch('getMyBooks');
+          self.books = self.$store.getters.books;
+        },1000)
       }
     },
     mounted(){
       var books;
       self = this;
-      // this.load = true;
-      setTimeout(function(){
-        self.$store.dispatch('getMyBooks');
-        self.books = self.$store.getters.books;
-      },1000);
-
-
+      this.showBooks()
     }
-    // mounted(){
-    //   var books;
-    //   self = this;
-    //   // this.load = true;
-    //   setTimeout(function(){
-    //     self.$http.get('data.json')
-    //               .then(response => {
-    //                   return response.json();
-    //               })
-    //               .then(data => {
-    //                   for(var i in data) {
-    //                     books = {
-    //                       id: i,
-    //                       title: data[i].title,
-    //                       author: data[i].author,
-    //                       description: data[i].description,
-    //                       show: false,
-    //                       image: data[i].image,
-    //                       link: data[i].link
-    //                     };
-    //                     self.books.push(books);
-    //                   }
-
-    //                   self.load = false;
-
-    //               });
-    //   },1000);
-    // }
   }
 </script>

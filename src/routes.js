@@ -1,10 +1,10 @@
 import Home from './components/Home';
-import Goals from './components/Goals';
+import Timeline from './components/Timeline';
 import Setting from './components/Setting';
 
 export const routes = [
     {path:'/', component: Home},
     {path:'/setting', component: Setting},
-    {path:'/goals', component: Goals}
+    {path:'/timeline', component: Timeline}
 ];
 
