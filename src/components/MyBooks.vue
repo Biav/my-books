@@ -15,6 +15,8 @@
             <v-img :src="book.image" height="200px">
             </v-img>
 
+            <div class="read">Read in: <input type="month" v-model="book.date" @change="updateDate(book)"></div>
+
             <v-card-title primary-title>
               <div>
                 <div class="headline">{{ book.title }}</div>
@@ -23,15 +25,30 @@
             </v-card-title>
 
             <v-card-actions>
-                <v-btn flat icon>
-                  <v-icon :class="{'favorite-red': book.favorite, 'favorite-grey': !book.favorite}">favorite</v-icon>
-                </v-btn>
-                <v-btn flat icon color="indigo lighten-1" :href="book.link" target="_blank">                                
-                  <i class="material-icons">visibility</i>
-                </v-btn>
-                <v-btn flat icon color="red lighten-3" @click="deleteBook(book)">
-                  <v-icon>delete</v-icon>
-                </v-btn>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn flat icon v-on="on">
+                      <v-icon @click="favorite(book)" :class="{'favorite-red': book.favorite, 'favorite-grey': !book.favorite}">favorite</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Add as Favorite </span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn flat icon color="indigo lighten-1" :href="book.link" target="_blank" v-on="on">                                
+                      <i class="material-icons">visibility</i>
+                    </v-btn>
+                    </template>
+                  <span>See Info </span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn flat icon color="red lighten-3" @click="deleteBook(book)" v-on="on">
+                      <v-icon>delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Delete Book </span>
+                </v-tooltip>
               <v-spacer></v-spacer>
               <v-btn icon @click="show(book)">
                 <v-icon>{{ book.show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
@@ -49,32 +66,6 @@
     </div>
   </v-container>
 </template>
-
-<style scoped>
-  .headline {
-    font-size: 16px!important;
-    font-weight: bold;
-    color: #7f8c8d;
-  }
-
-  .v-card__title--primary {
-    height: 125px;
-  }
-
-  .progress {
-    margin: 150px;
-    text-align: center;
-  }
-
-  .favorite-grey{
-    color: #bdc3c7!important;
-  }
-
-  .favorite-red{
-    color: #e74c3c!important;
-  }
-</style>
-
 
 <script>
 import { setTimeout } from 'timers';
@@ -94,22 +85,67 @@ let booksRef = db.ref('data')
       },
       deleteBook(book) {
         booksRef.child(book.id).remove().
-                then(()=>
+                 then(()=>
                   this.showBooks()
-                );
+                 );
+      },
+      favorite(book) {
+        booksRef.child(book.id).update({favorite: !book.favorite}).
+                 then(()=>
+                  this.showBooks()
+                 );
+      },
+      updateDate(book) {
+        console.log("date")
+        booksRef.child(book.id).update({date: book.date}).
+                 then(()=>
+                  this.showBooks()
+                 );
       },
       showBooks() {
-        self = this,
+        let self = this;
         setTimeout(function(){
           self.$store.dispatch('getMyBooks');
           self.books = self.$store.getters.books;
-        },1000)
+        },500)
       }
     },
     mounted(){
-      var books;
-      self = this;
+      let self = this;
       this.showBooks()
     }
   }
 </script>
+
+<style scoped>
+  .headline {
+    font-size: 16px!important;
+    font-weight: bold;
+    color: #7f8c8d;
+  }
+
+  .v-card__title--primary {
+    height: 125px;
+  }
+
+  .read {
+    text-align: right;
+    margin-right: 10px;
+    color: #9e9e9e;
+    font-weight: bold;
+  }
+
+  .progress {
+    margin: 150px;
+    text-align: center;
+  }
+
+  .favorite-grey{
+    color: #bdc3c7!important;
+  }
+
+  .favorite-red{
+    color: #e74c3c!important;
+  }
+
+</style>

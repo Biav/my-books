@@ -33,9 +33,7 @@
     }),
     methods: {
       search() {
-        var test = { title: 'test', image: 100};
-        // this.books.push(test);
-        self = this; 
+        let self = this; 
         if(this.book !== ""){
           this.$http.get('https://www.googleapis.com/books/v1/volumes?q='+this.book)
                   .then(response => {
@@ -78,6 +76,9 @@
 </script>
 
 <style scoped>
+  #content {
+    min-height: 600px
+  }
   .search {
     margin-top: 20px;
   }

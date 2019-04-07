@@ -45,6 +45,7 @@ export default new Vuex.Store({
                     date: data[i].date,
                     description: data[i].description,
                     show: false,
+                    favorite: data[i].favorite,
                     image: data[i].image,
                     link: data[i].link
                   };

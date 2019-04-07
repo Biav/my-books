@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <my-goals :total="Object.keys(books).length"></my-goals>
+  <div class="timeline">
+    <my-goals></my-goals>
     <v-timeline class="goals">
 
       <v-timeline-item v-for="book in books" :key="book['.key']" color="red lighten-2">
@@ -33,15 +33,6 @@ export default {
   }),
   firebase: {
     books: booksRef.orderByChild("date")
-  },
-  created() {
-    // self = this;
-    // self.$store.dispatch('getMyBooks')
-    //            .then((response)=>
-    //               setTimeout(function(){
-    //                 self.total = self.$store.getters.total;
-    //               },1000)
-    //             );
   },
   filters: {
     formatDate(date) {
@@ -83,6 +74,10 @@ export default {
   -webkit-line-clamp: 52;
   -webkit-box-orient: vertical;
   padding: 14px;
+}
+
+.timeline {
+  min-height: 600px
 }
 
 img {

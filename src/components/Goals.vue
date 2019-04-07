@@ -26,7 +26,6 @@
 
 <script>
   export default {
-    props: ["total"],
     data () {
       return {
         interval: {},
@@ -39,7 +38,7 @@
       clearInterval(this.interval)
     },
     mounted () {
-      self = this;
+      let self = this;
       self.$store.dispatch('getMyBooks')
                  .then((response)=>
                     setTimeout(function(){
