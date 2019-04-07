@@ -11,7 +11,8 @@ export default new Vuex.Store({
     state: {
         books: [],
         load: true,
-        goal: 12
+        goal: 12,
+        totalBooks: 0
     },
     mutations: {
         storeBooks (state, books) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
         },
         setLoad (state, load) {
             state.load = load
+        },
+        setTotal (state, total) {
+            state.totalBooks = total
         },
     },
     actions: {
@@ -46,6 +50,7 @@ export default new Vuex.Store({
                   };
                   commit('storeBooks', book);
                 }
+                commit('setTotal', state.books.length);
                 commit('setLoad', false)
             });
         }
@@ -59,6 +64,9 @@ export default new Vuex.Store({
         },
         goal (state) {
             return state.goal
+        },
+        total (state) {
+            return state.totalBooks
         }
     }
 });

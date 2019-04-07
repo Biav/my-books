@@ -1,15 +1,10 @@
 <template>
   <div>
     <v-toolbar color="indigo lighten-1" dark tabs>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>My Books</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>more_vert</v-icon>
-      </v-btn>
 
       <template v-slot:extension>
         <v-tabs centered color="indigo lighten-1" slider-color="yellow"> 

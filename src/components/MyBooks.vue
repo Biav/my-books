@@ -26,10 +26,10 @@
                 <v-btn flat icon>
                   <v-icon :class="{'favorite-red': book.favorite, 'favorite-grey': !book.favorite}">favorite</v-icon>
                 </v-btn>
-                <v-btn flat icon color="purple" :href="book.link" target="_blank">                                
+                <v-btn flat icon color="indigo lighten-1" :href="book.link" target="_blank">                                
                   <i class="material-icons">visibility</i>
                 </v-btn>
-                <v-btn flat icon @click="deleteBook(book)">
+                <v-btn flat icon color="red lighten-3" @click="deleteBook(book)">
                   <v-icon>delete</v-icon>
                 </v-btn>
               <v-spacer></v-spacer>
@@ -67,7 +67,7 @@
   }
 
   .favorite-grey{
-    color: #ecf0f1!important;
+    color: #bdc3c7!important;
   }
 
   .favorite-red{

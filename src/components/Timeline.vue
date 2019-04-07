@@ -1,12 +1,14 @@
 <template>
   <div>
-    <my-goals></my-goals>
+    <my-goals :total="Object.keys(books).length"></my-goals>
     <v-timeline class="goals">
-      <v-timeline-item v-for="book in books" :key="book['.key']" color="red lighten-2" large>
+
+      <v-timeline-item v-for="book in books" :key="book['.key']" color="red lighten-2">
         <template v-slot:opposite>
           <span class="month">{{book.date | formatDate}}</span>
         </template>
         <v-card class="elevation-2">
+
           <v-card-title class="headline">{{ book.title }}</v-card-title>
           <v-card-text class="card-book">
             <img :src="book.image" align="left">
@@ -27,10 +29,19 @@ let booksRef = db.ref("data");
 
 export default {
   data: () => ({
-    // books: []
+    total: 0
   }),
   firebase: {
     books: booksRef.orderByChild("date")
+  },
+  created() {
+    // self = this;
+    // self.$store.dispatch('getMyBooks')
+    //            .then((response)=>
+    //               setTimeout(function(){
+    //                 self.total = self.$store.getters.total;
+    //               },1000)
+    //             );
   },
   filters: {
     formatDate(date) {

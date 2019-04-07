@@ -14,7 +14,9 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <component :is="showBooks" @showBooks="showBooks = $event" :books="books"></component>
+    <transition name="fade" mode="out-in">
+      <component :is="showBooks" @showBooks="showBooks = $event" :books="books"></component>
+    </transition>
   </div>
 </template>
 
@@ -81,6 +83,12 @@
   }
   .search-book {
     margin-left: 40px;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: all 0.5s ease-out;
+  }
+  .fade-enter, .fade-leave-to {
+      opacity: 0;
   }
 </style>
 
